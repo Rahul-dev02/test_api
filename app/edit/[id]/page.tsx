@@ -1,63 +1,6 @@
-// 'use client';
-
-// import React,{ useState,useEffect } from "react";
-// const Edit=({params}:{params:Promise<{id:number}>})=>{
-
-//     const{id}=React.use(params);
-    
-//     const[data,setData]=useState({name:"",age:0,email:""});
-   
-
-//     const handleChange=(e:React.ChangeEvent<HTMLInputElement>)=>{        
-//             setData({...data,[e.target.name]:e.target.value});
-//     }
-        
-//     const handleUpdate=()=>{
-//                  const updateUser=async()=>{
-//             const res=await fetch(`https://68889463adf0e59551ba83ac.mockapi.io/mydata/${id}`,{
-//                 method:'PUT',
-//                 headers:{'content-type':'application/json'},
-//                 body:JSON.stringify({name:"",age:0,email:""})
-//             });
-//             if(res.ok)
-//             {                               
-//                console.log("Data has been updated");    
-//             }            
-//         }
-//         updateUser();
-//     }
-
-//     useEffect(()=>{
-       
-//     },[]);
-
-//     return(
-//         <>
-//             <h2>Edit</h2>
-
-//             {
-//                 .Students.length>0? 
-//                 <div>
-//                     Name : <input type="text" name="name" value={data.name} onChange={handleChange} /><br />
-//                     Age : <input type="number" name="age" value={data.age} onChange={handleChange} /><br />
-//                     Email : <input type="email" name="email" value={data.email} onChange={handleChange} /><br />
-//                     <input type="button" value="Update data" onClick={handleUpdate} />
-//                 </div>
-//                 :
-//                 <>  
-//                     <p>
-//                         There is no data for id = {id}
-//                     </p>
-//                 </>
-//             }
-            
-//         </>
-//     );
-// }
-// export default Edit;
-
 'use client';
 
+import { use } from 'react';
 import React, { useState, useEffect } from 'react';
 
 export type Student = {
@@ -66,18 +9,12 @@ export type Student = {
   email: string;
 };
 
-const Edit = ({ params }: { params: { id: string } }) => {
-  const { id } = params;
+const Edit = ({ params }: { params: Promise<{ id: string }> }) => {
+  const { id } = use(params); // ✅ This unwraps the promise
 
-  const [data, setData] = useState<Student>({
-    name: '',
-    age: 0,
-    email: '',
-  });
-
+  const [data, setData] = useState<Student>({ name: '', age: 0, email: '' });
   const [loading, setLoading] = useState(true);
 
-  // Fetch student data by ID
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch(`https://68889463adf0e59551ba83ac.mockapi.io/mydata/${id}`);
@@ -85,7 +22,7 @@ const Edit = ({ params }: { params: { id: string } }) => {
         const student = await res.json();
         setData(student);
       } else {
-        console.error("Failed to fetch data");
+        console.error('Failed to fetch data');
       }
       setLoading(false);
     };
@@ -104,10 +41,9 @@ const Edit = ({ params }: { params: { id: string } }) => {
     });
 
     if (res.ok) {
-      console.log('Data has been updated');
-      // Optionally redirect or show success message
+      console.log('Data updated');
     } else {
-      console.error('Failed to update data');
+      console.error('Failed to update');
     }
   };
 
