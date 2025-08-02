@@ -44,15 +44,18 @@ const Show=()=>{
         {
             students.map(student=>{return(
 
-                    <div key={student.id} className="box">
-                      <h3>{student.name}</h3>
-                      <p>{student.age}<br/>
-                        {student.email}
+                    <div key={student.id} className="box relative">
+                      <h3 className=""> Name:{student.name}</h3>
+                        <p>
+                           Age:  {student.age}<br />
+                          Email: {student.email}
                       </p>
                         
-                        <input type="button" value="Delete data"   onClick={()=> handleDelete(student.id)}/>
-                          &nbsp;&nbsp;&nbsp;&nbsp;
-                            <Link href={"/edit/"+student.id}>edit</Link>
+                        <input type="button" value="X"
+                        className="text-red-700 absolute top-0 right-2" 
+                          onClick={()=> handleDelete(student.id)}/>  &nbsp;&nbsp;&nbsp;&nbsp;
+                        
+                            <Link href={"/edit/"+student.id} className="text-blue-500 absolute right-3">edit</Link>
                     </div>
                    )
             })

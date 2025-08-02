@@ -27,7 +27,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-          <header className="bg-rose-400 py-4 text-center">
+          <header className="bg-linear-to-r from-cyan-500 to-blue-500 py-4 text-center">
             <h1>Next API</h1>
             <div className="flex justify-center space-x-5">
                <MenuBar/>
@@ -36,7 +36,7 @@ export default function RootLayout({
           </header>
         {children}
 
-        <footer className="bg-rose-400 p-2 fixed bottom-0 w-full text-center">
+        <footer className="bg-linear-to-r from-cyan-500 to-blue-500 p-2 fixed bottom-0 w-full text-center">
            <p> &copy; developed by RAHUL Yadav 2025</p>
         </footer>
       </body>
